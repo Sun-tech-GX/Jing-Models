@@ -18,12 +18,12 @@ from tools import *
 
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--epoch', type=int, default=50, help='epoch number')
-parser.add_argument('--lr_gen', type=float, default=2.5e-5, help='learning rate for generator')
+parser.add_argument('--epoch', type=int, default=30, help='epoch number')
+parser.add_argument('--lr_gen', type=float, default=1e-4, help='learning rate for generator')
 parser.add_argument('--batchsize', type=int, default=8, help='training batch size')
-parser.add_argument('--trainsize', type=int, default=480, help='training dataset size')
+parser.add_argument('--trainsize', type=int, default=352, help='training dataset size')
 parser.add_argument('--decay_rate', type=float, default=0.9, help='decay rate of learning rate')
-parser.add_argument('--decay_epoch', type=int, default=40, help='every n epochs decay learning rate')
+parser.add_argument('--decay_epoch', type=int, default=20, help='every n epochs decay learning rate')
 parser.add_argument('--feat_channel', type=int, default=256, help='reduced channel of saliency feat')
 parser.add_argument('--modal_loss', type=float, default=0.5, help='weight of the fusion modal')
 parser.add_argument('--focal_lamda', type=int, default=1, help='lamda of focal loss')
@@ -43,7 +43,7 @@ gt_root = './train/GT/'
 train_loader = get_loader(image_root, gt_root, batchsize=opt.batchsize, trainsize=opt.trainsize)
 total_step = len(train_loader)
 
-CE = torch.nn.BCELoss()
+CE = torch.nn.BCEWithLogitsLoss()
 mse_loss = torch.nn.MSELoss(size_average=True, reduce=True)
 size_rates = [1]  # multi-scale training
 

@@ -20,7 +20,7 @@ parser.add_argument('--latent_dim', type=int, default=256, help='latent dimensio
 
 opt = parser.parse_args()
 
-dataset_path = '/home/jingzhang/jing_files/RGBD_COD/dataset/test/'
+dataset_path = './test/'
 
 generator = Pred_endecoder(channel=opt.feat_channel)
 generator.load_state_dict(torch.load('./models/Model_50_gen.pth'))
@@ -28,7 +28,7 @@ generator.load_state_dict(torch.load('./models/Model_50_gen.pth'))
 generator.cuda()
 generator.eval()
 
-test_datasets = ['CAMO','CHAMELEON', 'COD10K', 'NC4K']
+test_datasets = ['SALICON']
 
 for dataset in test_datasets:
     save_path = './results/' + dataset + '/'
