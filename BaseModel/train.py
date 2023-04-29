@@ -157,7 +157,7 @@ for epoch in range(1, (opt.epoch+1)):
                 images = F.upsample(images, size=(trainsize, trainsize), mode='bilinear', align_corners=True)
                 gts = F.upsample(gts, size=(trainsize, trainsize), mode='bilinear', align_corners=True)
             pred = generator(images)
-            loss_all = structure_loss(pred, gts)
+            loss_all = CE(pred, gts)
 
             loss_all.backward()
             generator_optimizer.step()
